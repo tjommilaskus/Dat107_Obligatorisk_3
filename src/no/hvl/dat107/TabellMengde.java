@@ -157,7 +157,7 @@ public class TabellMengde<T> implements MengdeADT<T> {
 
     @SuppressWarnings("unchecked")
     private void utvidKapasitet() {
-        T[] nyTabell = (T[]) new Object()[tabell.length * 2];
+        T[] nyTabell = (T[]) new Object[tabell.length * 2];
 
         for (int i = 0; i < antall; i++){
             nyTabell[i] = tabell[i];
