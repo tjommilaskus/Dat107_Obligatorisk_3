@@ -195,4 +195,24 @@ public class LenketMengde<T> implements MengdeADT<T> {
             this.neste = null;
         }
     }
-}
+    @Override
+    public String toString() {
+        if (erTom()) {
+            return "[]";
+        }
+
+        StringBuilder sb = new StringBuilder("[");
+        Node<T> current = forste;
+
+        while (current != null) {
+            sb.append(current.data);
+            if (current.neste != null) {
+                sb.append(", ");
+            }
+            current = current.neste;
+        }
+
+        sb.append("]");
+        return sb.toString();
+    }
+    }
