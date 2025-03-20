@@ -16,32 +16,40 @@ public class Main {
         lenketMengde.leggTil(7);
         lenketMengde.leggTil(8);
 
-        // Skriver ut mengdene
+
         System.out.println("TabellMengde: " + tabellMengde);
         System.out.println("LenketMengde: " + lenketMengde);
 
-        // Måler kjøretid for inneholder-metoden på TabellMengde
         double tidInneholderTabell = målGjennomsnittstid(() -> tabellMengde.inneholder(2));
         System.out.println("TabellMengde inneholder(2): " + tidInneholderTabell + " ns");
 
-        // Måler kjøretid for inneholder-metoden på LenketMengde
         double tidInneholderLenket = målGjennomsnittstid(() -> lenketMengde.inneholder(6));
         System.out.println("LenketMengde inneholder(6): " + tidInneholderLenket + " ns");
 
-        // Måler kjøretid for erDelmengdeAv-metoden (tabellMengde delmengde av lenketMengde)
+        double tidLikTabell = målGjennomsnittstid(() -> tabellMengde.erLik(lenketMengde));
+        System.out.println("TabellMengde er Lik(lenketMengde): " + tidLikTabell + " ns");
+
+        double tidLikLenket = målGjennomsnittstid(() -> lenketMengde.erLik(tabellMengde));
+        System.out.println("LenketMengde er Lik(tabellMengde): " + tidLikLenket + " ns");
+
         double tidDelmengdeTabell = målGjennomsnittstid(() -> tabellMengde.erDelmengdeAv(lenketMengde));
         System.out.println("TabellMengde er delmengde av LenketMengde: " + tidDelmengdeTabell + " ns");
 
-        // Måler kjøretid for erDelmengdeAv-metoden (lenketMengde delmengde av tabellMengde)
         double tidDelmengdeLenket = målGjennomsnittstid(() -> lenketMengde.erDelmengdeAv(tabellMengde));
         System.out.println("LenketMengde er delmengde av TabellMengde: " + tidDelmengdeLenket + " ns");
+
+        double tidFjernTabell = målGjennomsnittstid(() -> tabellMengde.fjern(3));
+        System.out.println("Fjern fra TabellMengde: " + tidFjernTabell + " ns");
+
+        double tidFjernLenket = målGjennomsnittstid(() -> lenketMengde.fjern(6));
+        System.out.println("Fjern fra LenketMengde: " + tidFjernLenket + " ns");
     }
 
 
     private static double målGjennomsnittstid(Runnable metode) {
         long totalTid = 0;
 
-        // Kjører målingen flere ganger
+
         for (int i = 0; i < ANTALL_MÅLINGER; i++) {
             long start = System.nanoTime();
             metode.run();
@@ -49,7 +57,7 @@ public class Main {
             totalTid += (end - start);
         }
 
-        // Returner gjennomsnittlig kjøretid
+
         return (double) totalTid / ANTALL_MÅLINGER;
     }
 }
